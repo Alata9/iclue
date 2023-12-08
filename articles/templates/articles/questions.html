@@ -1,0 +1,39 @@
+{% extends 'articles/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Questions{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1>Questions & Answers</h1>
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <a href="{% url 'question_add' %}" class="btn btn-info" name="btn_add">ADD NEW QUESTION</a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <table class="table table-condensed table-scroll table-striped" id="id_table">
+            <tr>
+                <th align="center">item</th>
+                <th align="center">question</th>
+                <th align="center">answer</th>
+                <th align="center"></th>
+            </tr>
+            {% for i in object_list %}
+            <tr>
+                <td width="200">{{ i.item }}</td>
+                <td width="200">{{ i.name }}</td>
+                <td width="200">{{ i.answer }}</td>
+                <td width="10" align="right" style='white-space: nowrap'>
+                    <a href="{% url 'question_id' i.id %}" class='btn btn-info btn-xs' data-bs-toggle="tooltip"
+                       data-bs-placement="top" title="edit"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{% url 'question_del' i.id %}" class='btn btn-info btn-xs' data-bs-toggle="tooltip"
+                       data-bs-placement="top" title="delete"><i class="bi bi-trash3"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

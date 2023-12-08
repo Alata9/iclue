@@ -1,0 +1,40 @@
+{% extends 'articles/base.html' %}
+{% block title %}Delete{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+.container {
+  margin: 0;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 30%;
+  left: 50%;
+}
+</style>
+
+<div class="container">
+    <div class="row h-100 p-2 g-3 justify-content-center">
+        <div class="col-md-6 border p-3 shadow text-center">
+            <form method="post">
+                {% csrf_token %}
+                {% if error %}
+                {{ error }}
+                {% else %}
+                <h3>Are you sure you want to delete</h3>
+                <h4>"{{ object }}"</h4>
+                <br>
+                <div class="row text-center">
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-info" type="submit" name="btn_del">DELETE</button>
+                    </div>
+                    <div class="col-md-6 text-start">
+                        <a href="/questions" class='btn btn-info'>CANCEL</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
